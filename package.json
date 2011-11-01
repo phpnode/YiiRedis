@@ -1,0 +1,12 @@
+{
+	"name": "redis",
+	"description": "",
+	"author": null,
+	"installationHash": null,
+	"type": "git",
+	"url": null,
+	"repositoryName": "local",
+	"dependencies": [
+		
+	]
+}
