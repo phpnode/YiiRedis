@@ -1,5 +1,24 @@
 <?php
-
+/**
+ * Represents a redis set.
+ * Redis Sets are an unordered collection of Strings. It is possible to add, remove, and test for existence of members in O(1) (constant time regardless of the number of elements contained inside the Set).
+ *
+ * <pre>
+ * $set = new ARedisSet("mySet");
+ * $set->add(1);
+ * $set->add(2);
+ * $set->add(3);
+ *
+ * $otherSet = new ARedisSet("myOtherSet");
+ * $otherSet->add(2);
+ *
+ * print_r($set->diff($otherSet)); // the difference between the sets
+ * </pre>
+ *
+ *
+ * @author Charles Pick
+ * @package packages.redis
+ */
 class ARedisSet extends ARedisIterableEntity {
 	/**
 	 * Adds an item to the set

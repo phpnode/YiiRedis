@@ -1,5 +1,22 @@
 <?php
-
+/**
+ * Represents a redis sorted set.
+ *
+ * Redis Sorted Sets are, similarly to Redis Sets, non repeating collections of Strings. The difference is that every member of a Sorted Set is associated with score, that is used in order to take the sorted set ordered, from the smallest to the greatest score. While members are unique, scores may be repeated.
+ *
+ * <pre>
+ * $set = new ARedisSortedSet("mySortedSet");
+ * $set->add("myThing", 0.5);
+ * $set->add("myOtherThing", 0.6);
+ *
+ * foreach($set as $key => $score) {
+ * 	echo $key.":".$score."\n";
+ * }
+ * </pre>
+ *
+ * @author Charles Pick
+ * @package packages.redis
+ */
 class ARedisSortedSet extends ARedisIterableEntity {
 
 	/**

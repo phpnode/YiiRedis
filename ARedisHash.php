@@ -1,5 +1,14 @@
 <?php
-
+/**
+ * Represents a persistent hash stored in redis.
+ * <pre>
+ * $hash = new ARedisHash("myHash");
+ * $hash['a key'] = "some value"; // value is instantly saved to redis
+ * $hash['another key'] = "some other value"; // value is instantly saved to redis
+ * </pre>
+ * @author Charles Pick
+ * @package packages.redis
+ */
 class ARedisHash extends ARedisIterableEntity {
 
 	/**

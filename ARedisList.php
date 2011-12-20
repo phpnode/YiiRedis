@@ -1,7 +1,14 @@
 <?php
 /**
  * Represents a redis list.
- *
+ * <pre>
+ * $list = new ARedisList("myList");
+ * $list[] = "an item"; // instantly saved to redis
+ * $list[] = "another item"; // instantly saved to redis
+ * echo count($list); // 2
+ * echo $list->pop() // "another item"
+ * echo count($list); // 1
+ * </pre>
  * @author Charles Pick
  * @package packages.redis
  */
