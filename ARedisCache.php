@@ -90,7 +90,7 @@ class ARedisCache extends CCache {
 		else
 			$expire=0;
 
-		return $this->getConnection()->getClient()->set($key,$value,$expire);
+		return $this->getConnection()->getClient()->setnx($key,$value,$expire);
 	}
 
 	/**
