@@ -91,6 +91,7 @@ class ARedisSet extends ARedisIterableEntity {
 
 	/**
 	 * Gets the difference between this set and the given set(s), stores it in a new set and returns it
+	 * @param ARedisSet|string $destination the destination to store the result in
 	 * @param mixed $set, $set2 The sets to compare to, either ARedisSet instances or their names
 	 * @return ARedisSet a set that contains the difference between this set and the given sets
 	 */
@@ -149,6 +150,7 @@ class ARedisSet extends ARedisIterableEntity {
 	}
 	/**
 	 * Gets the intersection between this set and the given set(s), stores it in a new set and returns it
+	 * @param ARedisSet|string $destination the destination to store the result in
 	 * @param mixed $set, $set2 The sets to compare to, either ARedisSet instances or their names
 	 * @return ARedisSet a set that contains the intersection between this set and the given sets
 	 */
@@ -207,6 +209,7 @@ class ARedisSet extends ARedisIterableEntity {
 	}
 	/**
 	 * Gets the union of this set and the given set(s), stores it in a new set and returns it
+	 * @param ARedisSet|string $destination the destination to store the result in
 	 * @param mixed $set, $set2 The sets to compare to, either ARedisSet instances or their names
 	 * @return ARedisSet a set that contains the union of this set and the given sets
 	 */
@@ -242,7 +245,7 @@ class ARedisSet extends ARedisIterableEntity {
 
 	/**
 	 * Moves an item from this redis set to another
-	 * @param ARedisIterableSet|string $destination the set to move the item to
+	 * @param ARedisSet|string $destination the set to move the item to
 	 * @param mixed $item the item to move
 	 * @return boolean true if the item was moved successfully
 	 */
@@ -302,7 +305,14 @@ class ARedisSet extends ARedisIterableEntity {
 		else if($data!==null)
 			throw new CException(Yii::t('yii','List data must be an array or an object implementing Traversable.'));
 	}
-
+	/**
+	 * Determines whether the item is contained in the entity
+	 * @param mixed $item the item to check for
+	 * @return boolean true if the item exists in the entity, otherwise false
+	 */
+	public function contains($item) {
+		return $this->getConnection()->getClient()->sismember($this->name, $item);
+	}
 	/**
 	 * Returns whether there is an item at the specified offset.
 	 * This method is required by the interface ArrayAccess.
