@@ -1,11 +1,21 @@
 <?php
-
+/**
+ * A log route that allows log items to be stored or broadcast by redis.
+ * @author Charles Pick
+ * @package packages.redis
+ */
 class ARedisLogRoute extends CLogRoute {
 	/**
 	 * The name of the redis key to use when storing logs
 	 * @var string
 	 */
 	public $redisKey;
+
+	/**
+	 * Whether to broadcast log messages via pub/sub instead of saving them
+	 * @var boolean
+	 */
+	public $useChannel = false;
 
 	/**
 	 * Holds the redis connection
@@ -42,7 +52,7 @@ class ARedisLogRoute extends CLogRoute {
 	}
 
 	/**
-	 * Stores log messages into database.
+	 * Stores or broadcasts log messages via redis.
 	 * @param array $logs list of log messages
 	 */
 	protected function processLogs($logs)
@@ -67,7 +77,12 @@ class ARedisLogRoute extends CLogRoute {
 			else {
 				$json = json_encode($item);
 			}
-			$redis->publish($this->redisKey, $json);
+			if ($this->useChannel) {
+				$redis->publish($this->redisKey, $json);
+			}
+			else {
+				$redis->zAdd($this->redisKey,$log[3],$json);
+			}
 		}
 	}
 }
