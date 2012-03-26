@@ -1,10 +1,28 @@
 <?php
-
+/**
+ * Represents a redis sorted set.
+ *
+ * Redis Sorted Sets are, similarly to Redis Sets, non repeating collections of Strings. The difference is that every member of a Sorted Set is associated with score, that is used in order to take the sorted set ordered, from the smallest to the greatest score. While members are unique, scores may be repeated.
+ *
+ * <pre>
+ * $set = new ARedisSortedSet("mySortedSet");
+ * $set->add("myThing", 0.5);
+ * $set->add("myOtherThing", 0.6);
+ *
+ * foreach($set as $key => $score) {
+ * 	echo $key.":".$score."\n";
+ * }
+ * </pre>
+ *
+ * @author Charles Pick
+ * @package packages.redis
+ */
 class ARedisSortedSet extends ARedisIterableEntity {
 
 	/**
 	 * Adds an item to the set
-	 * @param mixed $item the item to add
+	 * @param string $key the key to add
+	 * @param integer $value the score for this key
 	 * @return boolean true if the item was added, otherwise false
 	 */
 	public function add($key, $value) {
@@ -17,7 +35,7 @@ class ARedisSortedSet extends ARedisIterableEntity {
 	}
 	/**
 	 * Removes an item from the set
-	 * @param mixed $item the item to remove
+	 * @param string $key the item to remove
 	 * @return boolean true if the item was removed, otherwise false
 	 */
 	public function remove($key) {
@@ -33,6 +51,7 @@ class ARedisSortedSet extends ARedisIterableEntity {
 
 	/**
 	 * Gets the intersection between this set and the given set(s), stores it in a new set and returns it
+	 * @param ARedisSortedSet|string $destination the destination to store the result in
 	 * @param mixed $set The sets to compare to, either ARedisSortedSet instances or their names
 	 * @param array $weights the weights for the sets, if any
 	 * @return ARedisSortedSet a set that contains the intersection between this set and the given sets
@@ -76,6 +95,7 @@ class ARedisSortedSet extends ARedisIterableEntity {
 
 	/**
 	 * Gets the union of this set and the given set(s), stores it in a new set and returns it
+	 * @param ARedisSortedSet|string $destination the destination to store the result in
 	 * @param mixed $set The sets to compare to, either ARedisSortedSet instances or their names
 	 * @param array $weights the weights for the sets, if any
 	 * @return ARedisSortedSet a set that contains the union of this set and the given sets

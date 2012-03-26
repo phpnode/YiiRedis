@@ -43,8 +43,12 @@ abstract class ARedisEntity extends CBehavior {
 	 * @param ARedisConnection|string $connection the redis connection to use with this entity
 	 */
 	public function __construct($name = null, $connection = null) {
-		$this->name = $name;
-		$this->setConnection($connection);
+		if ($name !== null) {
+			$this->name = $name;
+		}
+		if ($connection !== null) {
+			$this->setConnection($connection);
+		}
 	}
 	/**
 	 * Attaches the entity to a component
