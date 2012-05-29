@@ -17,7 +17,8 @@
  * }
  *
  * </pre>
- *
+ * @package packages.redis
+ * @author Charles Pick
  */
 abstract class ARedisEntity extends CBehavior {
 	/**

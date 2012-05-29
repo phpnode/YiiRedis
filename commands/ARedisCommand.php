@@ -1,5 +1,9 @@
 <?php
 Yii::import("packages.redis.*");
+/**
+ * A simple console command that subscribes to a redis channel
+ * @package packages.redis.commands
+ */
 class ARedisCommand extends CConsoleCommand {
 
 	public function actionSubscribe($args) {
