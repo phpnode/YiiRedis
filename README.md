@@ -143,3 +143,5 @@ $record->somethingElse = "some other value";
 $record->save(); // saves the record to redis
 $record->delete(); // deletes the record from redis
 </pre>
+
+[![githalytics.com alpha](https://cruel-carlota.pagodabox.com/d204205868904fefb008f31d7cb50b12 "githalytics.com")](http://githalytics.com/phpnode/YiiRedis)
