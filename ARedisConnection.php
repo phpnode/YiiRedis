@@ -48,6 +48,7 @@ class ARedisConnection extends CApplicationComponent {
 		if ($this->_client === null) {
 			$this->_client = new Redis;
 			$this->_client->connect($this->hostname, $this->port);
+			$this->_client->select($this->database);
 		}
 		return $this->_client;
 	}
