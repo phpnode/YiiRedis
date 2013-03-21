@@ -50,7 +50,8 @@ class ARedisCounterTest extends CTestCase {
 										"class" => "packages.redis.ARedisConnection",
 										"hostname" => REDIS_HOSTNAME,
 										"port" => REDIS_PORT,
-										"database" => REDIS_DATABASE
+										"database" => REDIS_DATABASE,
+										"password" => REDIS_PASSWORD
 									));
 		}
 		return $this->_connection;
