@@ -30,6 +30,12 @@ class ARedisConnection extends CApplicationComponent {
 	 */
 	public $database=1;
 
+    /**
+     * The redis server password
+     * @var password
+     */
+    public $password=null;
+
 	/**
 	 * Sets the redis client to use with this connection
 	 * @param Redis $client the redis client instance
@@ -48,7 +54,12 @@ class ARedisConnection extends CApplicationComponent {
 		if ($this->_client === null) {
 			$this->_client = new Redis;
 			$this->_client->connect($this->hostname, $this->port);
-			$this->_client->select($this->database);
+			if (isset($this->password)) {
+				if ($this->_client->auth($this->password) === false) {
+					throw new CException('Redis authentication failed!');
+				}
+			}
+            $this->_client->select($this->database);
 		}
 		return $this->_client;
 	}
