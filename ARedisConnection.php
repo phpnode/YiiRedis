@@ -59,7 +59,7 @@ class ARedisConnection extends CApplicationComponent {
 					throw new CException('Redis authentication failed!');
 				}
 			}
-            $this->_client->select($this->database);
+			$this->_client->select($this->database);
 		}
 		return $this->_client;
 	}
