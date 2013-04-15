@@ -115,6 +115,6 @@ class ARedisCache extends CCache {
 	 * @return boolean whether flushing was successful or not
 	 */
 	public function flush() {
-		return (bool) $this->getConnection()->getClient()->flush();
+		return (bool) $this->getConnection()->getClient()->flushDb();
 	}
 }
