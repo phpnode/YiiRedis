@@ -26,8 +26,8 @@ This package relies on the https://github.com/nicolasff/phpredis PHP extension, 
 <p>To store a simple value in a key and read it back:</p>
 <pre>
 Yii::app()->redis->getClient()->set("myKey", "Your Value");
-echo Yii::app()->redis->getClient->get("myKey"); // outputs "Your Value"
-Yii::app()->redis->getClient()->rem("myKey"); // deletes the key
+echo Yii::app()->redis->getClient()->get("myKey"); // outputs "Your Value"
+Yii::app()->redis->getClient()->del("myKey"); // deletes the key
 </pre>
 
 
