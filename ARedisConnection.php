@@ -65,7 +65,7 @@ class ARedisConnection extends CApplicationComponent {
 					throw new CException('Redis authentication failed!');
 				}
 			}
-            $this->_client->setOption(Redis::OPT_PREFIX, $this->defaul);
+            $this->_client->setOption(Redis::OPT_PREFIX, $this->defaultPrefix);
 			$this->_client->select($this->database);
 		}
 		return $this->_client;
