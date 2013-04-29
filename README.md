@@ -18,7 +18,7 @@ This package relies on the https://github.com/nicolasff/phpredis PHP extension, 
 		"hostname" => "localhost",
 		"port" => 6379,
 		"database" => 1,
-		"defaultPrefix" => "Yii.redis."
+		"prefix" => "Yii.redis."
 	),
 	...
 ),

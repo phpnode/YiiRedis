@@ -22,7 +22,7 @@ class ARedisConnection extends CApplicationComponent {
      * Redis default prefix
      * @var string
      */
-    public $defaultPrefix = "Yii.redis.";
+    public $prefix = "Yii.redis.";
 
 	/**
 	 * The redis server port
@@ -65,7 +65,7 @@ class ARedisConnection extends CApplicationComponent {
 					throw new CException('Redis authentication failed!');
 				}
 			}
-            $this->_client->setOption(Redis::OPT_PREFIX, $this->defaultPrefix);
+            $this->_client->setOption(Redis::OPT_PREFIX, $this->prefix);
 			$this->_client->select($this->database);
 		}
 		return $this->_client;
