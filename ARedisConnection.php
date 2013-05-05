@@ -66,7 +66,7 @@ class ARedisConnection extends CApplicationComponent {
 				}
 			}
             $this->_client->setOption(Redis::OPT_PREFIX, $this->prefix);
-			$this->_client->select($this->database);
+            $this->_client->select($this->database);
 		}
 		return $this->_client;
 	}
