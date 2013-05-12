@@ -13,6 +13,11 @@ class ARedisSession extends CHttpSession
 	public $keyPrefix = "Yii.ARedisSession.";
 
 	/**
+	 * The suffix to use when storing and retrieving sessions
+	 * @var string
+	 */
+	public $keySuffix = '';
+	/**
 	 * Holds the redis connection
 	 * @var ARedisConnection
 	 */
@@ -107,6 +112,6 @@ class ARedisSession extends CHttpSession
 	 */
 	protected function calculateKey($id)
 	{
-		return $this->keyPrefix.$id;
+		return $this->keyPrefix.$id.$this->keySuffix;
 	}
 }
