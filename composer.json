@@ -1,0 +1,33 @@
+{
+    "name": "codemix/yiiredis",
+    "description": "Familiar Yii style access to redis",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Charles Pick",
+            "email": "charles.pick@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": [
+            "ARedisCache.php",
+            "ARedisChannel.php",
+            "ARedisConnection.php",
+            "ARedisCounter.php",
+            "ARedisEntity.php",
+            "ARedisHash.php",
+            "ARedisIterableEntity.php",
+            "ARedisList.php",
+            "ARedisLogRoute.php",
+            "ARedisMutex.php",
+            "ARedisRecord.php",
+            "ARedisSession.php",
+            "ARedisSet.php",
+            "ARedisSortedSet.php",
+            "ARedisStatePersister.php"
+        ]
+    },
+    "require": {
+
+    }
+}
