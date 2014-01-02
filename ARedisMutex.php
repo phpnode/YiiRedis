@@ -64,6 +64,13 @@ class ARedisMutex extends ARedisEntity {
 			if ($value > microtime(true)) {
 				return false;
 			}
+			else {
+				//prevent a race codition if another process finds it expired at the same time
+				$current = $redis->getset($this->name, $this->getExpiresAt(true));
+				if ($value != $current){
+					return false; 
+				}
+			}
 		}
 		$this->afterLock();
 		return true;
