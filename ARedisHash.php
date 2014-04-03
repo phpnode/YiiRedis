@@ -21,7 +21,7 @@ class ARedisHash extends ARedisIterableEntity {
 		if ($this->name === null) {
 			throw new CException(get_class($this)." requires a name!");
 		}
-		if (!$this->getConnection()->getClient()->hset($this->name,$key, $value)) {
+		if ($this->getConnection()->getClient()->hset($this->name,$key, $value) === false) {
 			return false;
 		}
 		$this->_data = null;
