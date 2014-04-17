@@ -42,6 +42,12 @@ class ARedisConnection extends CApplicationComponent {
      */
     public $password=null;
 
+    /**
+     * The redis socket timeout, defaults to 0 (unlimited)
+     * @var timeout
+     */
+    public $timeout=0;
+
 	/**
 	 * Sets the redis client to use with this connection
 	 * @param Redis $client the redis client instance
@@ -55,11 +61,11 @@ class ARedisConnection extends CApplicationComponent {
 	 * Gets the redis client
 	 * @return Redis the redis client
 	 */
-	public function getClient()
+	public function getClient($reconnect = false)
 	{
-		if ($this->_client === null) {
+		if ($this->_client === null || $reconnect) {
 			$this->_client = new Redis;
-			$this->_client->connect($this->hostname, $this->port);
+			$this->_client->connect($this->hostname, $this->port, $this->timeout);
 			if (isset($this->password)) {
 				if ($this->_client->auth($this->password) === false) {
 					throw new CException('Redis authentication failed!');
