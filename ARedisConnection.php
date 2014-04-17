@@ -18,11 +18,11 @@ class ARedisConnection extends CApplicationComponent {
 	 */
 	public $hostname = "localhost";
 
-    /**
-     * Redis default prefix
-     * @var string
-     */
-    public $prefix = "Yii.redis.";
+	/**
+	 * Redis default prefix
+	 * @var string
+	 */
+	public $prefix = "Yii.redis.";
 
 	/**
 	 * The redis server port
@@ -36,11 +36,17 @@ class ARedisConnection extends CApplicationComponent {
 	 */
 	public $database=1;
 
-    /**
-     * The redis server password
-     * @var password
-     */
-    public $password=null;
+	/**
+	 * The redis server password
+	 * @var password
+	 */
+	public $password=null;
+
+	/**
+	 * The redis socket timeout, defaults to 0 (unlimited)
+	 * @var timeout
+	 */
+	public $timeout=0;
 
 	/**
 	 * Sets the redis client to use with this connection
@@ -55,18 +61,18 @@ class ARedisConnection extends CApplicationComponent {
 	 * Gets the redis client
 	 * @return Redis the redis client
 	 */
-	public function getClient()
+	public function getClient($reconnect = false)
 	{
-		if ($this->_client === null) {
+		if ($this->_client === null || $reconnect) {
 			$this->_client = new Redis;
-			$this->_client->connect($this->hostname, $this->port);
+			$this->_client->connect($this->hostname, $this->port, $this->timeout);
 			if (isset($this->password)) {
 				if ($this->_client->auth($this->password) === false) {
 					throw new CException('Redis authentication failed!');
 				}
 			}
-            $this->_client->setOption(Redis::OPT_PREFIX, $this->prefix);
-            $this->_client->select($this->database);
+			$this->_client->setOption(Redis::OPT_PREFIX, $this->prefix);
+			$this->_client->select($this->database);
 		}
 		return $this->_client;
 	}
