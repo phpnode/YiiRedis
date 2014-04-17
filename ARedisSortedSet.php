@@ -47,7 +47,20 @@ class ARedisSortedSet extends ARedisIterableEntity {
 		return true;
 	}
 
-
+	/**
+	 * Increment (or decrement if $byAmount is negative) the score of an item from the set
+	 * @param integer $byAmount the amount to increment by, defaults to 1
+	 * @return integer the new value of the score if was incremented, otherwise false
+	 */
+    public function increment($key, $byAmount = 1)
+    {
+        if (!($score = $this->getConnection()->getClient()->zincrby($this->name, $byAmount, $key))) {
+			return false;
+		}
+		$this->_data = null;
+		$this->_count = null;
+		return $score;
+    }
 
 	/**
 	 * Gets the intersection between this set and the given set(s), stores it in a new set and returns it
