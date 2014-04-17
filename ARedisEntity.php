@@ -112,4 +112,13 @@ abstract class ARedisEntity extends CBehavior {
 		return $this->_connection;
 	}
 
+	/**
+	 * Sets the expiration time in seconds to this entity 
+	 *  @param integer number of expiration for this entity in seconds
+	 */
+	public function expire($seconds)
+    {
+        return $this->getConnection()->expire($this->name, $seconds);
+    }
+
 }
