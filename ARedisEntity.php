@@ -117,8 +117,8 @@ abstract class ARedisEntity extends CBehavior {
 	 *  @param integer number of expiration for this entity in seconds
 	 */
 	public function expire($seconds)
-    {
-        return $this->getConnection()->expire($this->name, $seconds);
-    }
+	{
+		return $this->getConnection()->expire($this->name, $seconds);
+	}
 
 }
