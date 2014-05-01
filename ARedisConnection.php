@@ -75,10 +75,10 @@ class ARedisConnection extends CApplicationComponent {
 				$this->_client->connect($this->unixSocket);
 			else {
 				$this->_client->connect($this->hostname, $this->port, $this->timeout);
-				if (isset($this->password)) {
-					if ($this->_client->auth($this->password) === false) {
-						throw new CException('Redis authentication failed!');
-					}
+			}
+			if (isset($this->password)) {
+				if ($this->_client->auth($this->password) === false) {
+					throw new CException('Redis authentication failed!');
 				}
 			}
 			$this->_client->setOption(Redis::OPT_PREFIX, $this->prefix);
