@@ -28,7 +28,7 @@ class ARedisConnectionTest extends CTestCase {
 		$redis = Yii::createComponent(
 								array(
 									"class" => "packages.redis.ARedisConnection",
-									"unix_socket" => REDIS_SOCKET,
+									"unixSocket" => REDIS_SOCKET,
 									"database" => REDIS_DATABASE,
 									"password" => REDIS_PASSWORD
 								));

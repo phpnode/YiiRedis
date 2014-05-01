@@ -14,9 +14,9 @@ class ARedisConnection extends CApplicationComponent {
 	
 	/**
 	 * The redis unix socket location
-	 * @var unix_socket
+	 * @var unixSocket
 	 */
-	public $unix_socket=null;
+	public $unixSocket=null;
 
 	/**
 	 * The redis server name
@@ -71,8 +71,8 @@ class ARedisConnection extends CApplicationComponent {
 	{
 		if ($this->_client === null || $reconnect) {
 			$this->_client = new Redis;
-			if($this->unix_socket !== null)
-				$this->_client->connect($this->unix_socket);
+			if($this->unixSocket !== null)
+				$this->_client->connect($this->unixSocket);
 			else {
 				$this->_client->connect($this->hostname, $this->port, $this->timeout);
 				if (isset($this->password)) {
