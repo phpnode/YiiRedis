@@ -23,6 +23,22 @@ class ARedisConnectionTest extends CTestCase {
 		$redis->delete($keyId);
 		$this->assertEquals(null,$redis->get($keyId));
 	}
+	
+	public function testUnixSocketConnection() {
+		$redis = Yii::createComponent(
+								array(
+									"class" => "packages.redis.ARedisConnection",
+									"unix_socket" => REDIS_SOCKET,
+									"database" => REDIS_DATABASE,
+									"password" => REDIS_PASSWORD
+								));
+		$keyId = "TEST_KEY:".uniqid();
+		$this->assertEquals(null,$redis->get($keyId));
+		$redis->set($keyId,"TEST");
+		$this->assertEquals("TEST",$redis->get($keyId));
+		$redis->delete($keyId);
+		$this->assertEquals(null,$redis->get($keyId));
+	}
 
 	/**
 	 * Sets the redis connection to use with this test

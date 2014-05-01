@@ -11,6 +11,12 @@ class ARedisConnection extends CApplicationComponent {
 	 * @var Redis
 	 */
 	protected $_client;
+	
+	/**
+	 * The redis unix socket location
+	 * @var unix_socket
+	 */
+	public $unix_socket=null;
 
 	/**
 	 * The redis server name
@@ -65,10 +71,14 @@ class ARedisConnection extends CApplicationComponent {
 	{
 		if ($this->_client === null || $reconnect) {
 			$this->_client = new Redis;
-			$this->_client->connect($this->hostname, $this->port, $this->timeout);
-			if (isset($this->password)) {
-				if ($this->_client->auth($this->password) === false) {
-					throw new CException('Redis authentication failed!');
+			if($this->unix_socket !== null)
+				$this->_client->connect($this->unix_socket);
+			else {
+				$this->_client->connect($this->hostname, $this->port, $this->timeout);
+				if (isset($this->password)) {
+					if ($this->_client->auth($this->password) === false) {
+						throw new CException('Redis authentication failed!');
+					}
 				}
 			}
 			$this->_client->setOption(Redis::OPT_PREFIX, $this->prefix);
