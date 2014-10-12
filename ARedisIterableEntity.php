@@ -26,7 +26,8 @@ abstract class ARedisIterableEntity extends ARedisEntity implements IteratorAggr
 	 */
 	public function getIterator()
 	{
-		return new CListIterator($this->getData());
+        	$data = $this->getData();
+		return new CListIterator($data);
 	}
 
 	/**
